@@ -82,7 +82,16 @@ def sum_coins(coffee, choice_drink, resources_left, profit):
         print("Sorry that's not enough money. Money refunded.")
     else:
         profit = update_resource(coffee,choice_drink, resources_left, profit)
+    if change_left > 0:
+        print(f"Here's your change: ${change_left}")
     return round(change_left, 2), profit
+
+
+def print_resource(resources_left):
+    print(f"Water: {resources['water']}ml")
+    print(f"Milk: {resources['milk']}ml")
+    print(f"Coffee: {resources['coffee']}g")
+    print(f"Money: ${money}")
 
 
 resource = False
@@ -96,13 +105,10 @@ while True:
     if choice == "cappuccino":
         resource = check_resource(MENU["cappuccino"]["ingredients"], resources)
     if choice == "report":
-        print(f"Water: {resources['water']}ml")
-        print(f"Milk: {resources['milk']}ml")
-        print(f"Coffee: {resources['coffee']}g")
-        print(f"Money: ${money}")
+        print_resource(resources)
     if resource is True and (choice == "espresso" or choice == "latte" or choice == "cappuccino"):
         print("Please insert coins.")
         change, money = sum_coins(MENU, choice, resources, money)
     
     if choice == "off":
-        break
+        break    
